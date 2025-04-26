@@ -1,0 +1,5 @@
+[
+[{ "op": "add", "path": "/scripts/-", "value": "/objects/bookofspirits_chattyobj.lua" } ]
+,[{ "op": "add", "path": "/npcName", "value": "Bartender" } ]
+,[{ "op": "add", "path": "/displayTitle", "value": "Beak Easy" } ]
+]

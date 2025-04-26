@@ -1,0 +1,6 @@
+[
+[
+{ "op" : "add", "path" : "/baseParameters/statusSettings/statusProperties/displayTitle", "value" : "Boss"}
+,{ "op" : "add", "path" : "/shortdescription", "value" : "Asra Nox"}
+]
+]

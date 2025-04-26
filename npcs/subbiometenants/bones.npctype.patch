@@ -1,0 +1,1 @@
+[[{ "op": "add", "path": "/scripts/-", "value": "/npcs/bookofspirits_interact.lua"},{ "op" : "add", "path" : "/displayTitle", "value" : "Bonesmith"}]]

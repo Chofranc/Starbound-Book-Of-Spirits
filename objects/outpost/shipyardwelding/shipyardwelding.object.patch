@@ -1,0 +1,12 @@
+[
+	[
+		//If the next path to patch exist, it will add the value to the array
+		{
+			"op" : "test",
+			"path" : "/scripts"
+		},
+		{ "op": "add", "path": "/scripts/-", "value": "/objects/bookofspirits_chattyobj.lua" },
+		{ "op": "add", "path": "/npcName", "value": "Weggy" },
+		{ "op": "add", "path": "/displayTitle", "value": "Penguin Welder" }
+	]
+]

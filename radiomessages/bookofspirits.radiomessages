@@ -1,0 +1,9 @@
+{
+"bookOfSpiritsShipPetRenamerAvailable" : {
+    "important" : true,
+    "unique" : true,
+    "text" : "- Book Of Spirits -\nYou can rename your ship pet by interacting with them twice within the span of 0.5 second. Only their owner can rename them.",
+    "textSpeed" : 999,
+	"persistTime" : 10.0
+  }
+}
