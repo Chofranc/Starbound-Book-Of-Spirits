@@ -1,6 +1,0 @@
-[
-[
-{ "op" : "add", "path" : "/shortdescription", "value" : "Tentacle"},
-{"op": "add","path": "/baseParameters/scripts/-","value": "/monsters/pets/bookofspirits_pet_interact.lua"}
-]
-]
