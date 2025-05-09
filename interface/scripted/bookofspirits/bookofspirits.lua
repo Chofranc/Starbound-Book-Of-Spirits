@@ -18,6 +18,8 @@ function update(dt)
 					local health = world.entityHealth(bookOfSpiritsParams.entityId)
 					if health[1]/health[2] <= bookOfSpiritsParams.capturableTreshold then
 						widget.setVisible("namePlateLayout.capturable_glow",true)
+					else
+						widget.setVisible("namePlateLayout.capturable_glow",false)
 					end
 				else
 					widget.setVisible("namePlateLayout.capturable_glow",false)
