@@ -1,6 +1,6 @@
 function init() 
     self.bookOfSpiritsConfig = root.assetJson("/bookofspirits.config")
-    self.previousEntity = {typeName = "", name = "", nameOverride = "",title = ""}
+    self.previousEntity = {typeName = "", name = "", nameOverride = "",title = "", entityId = nil,capturable = false, capturableTreshold = 0}
 	status.clearPersistentEffects("bookofspiritdisplay")
 	self.petRenamerIdGroup = {}
 	_, dmgHeartbeat = status.inflictedDamageSince()
@@ -55,9 +55,9 @@ function update(dt)
 			if self.getTitle:succeeded() then
 				local tableResult = {}
 				tableResult = self.getTitle:result()
-				if tableResult.title ~= "" then
+				if tableResult.title ~= "" and tableResult.id == self.previousEntity.entityId then
 					self.previousEntity.title = tableResult.title
-					status.setStatusProperty("bookOfSpiritsType",self.previousEntity.title)
+					status.setStatusProperty("bookOfSpiritsParams",self.previousEntity)
 				end
 			end
 			self.getTitle = nil
@@ -73,7 +73,7 @@ function setEntity(entityId, type, index)
 
 	if index == 1 then -- If in damage notification. Only take the first hitted entity
 		if self.previousEntity.name ~= name then -- New entity hit
-			self.previousEntity = {typeName = typeName, name = name, nameOverride = "",title = ""}
+			self.previousEntity = {typeName = typeName, name = name, nameOverride = "",title = "" , entityId = entityId,capturable = false, capturableTreshold = 0}
 			if type == "npc" then
 				local title = root.npcConfig(typeName).displayTitle or ""
 				if root.npcConfig(typeName).displayTitleAsName ~= nil and self.bookOfSpiritsConfig.displayTitleAsName then
@@ -83,6 +83,8 @@ function setEntity(entityId, type, index)
 				end
 			elseif type == "monster" then
 				self.previousEntity.title = root.monsterParameters(typeName).statusSettings.statusProperties.displayTitle or world.getProperty("title_" .. name) or ""
+				self.previousEntity.capturable = root.monsterParameters(typeName).capturable or false
+				self.previousEntity.capturableTreshold = root.monsterParameters(typeName).captureHealthFraction or 0
 				if self.previousEntity.title == "" then
 					self.getTitle = world.sendEntityMessage(entityId, "bookOfSpiritsGetTitle")
 				end
@@ -102,14 +104,9 @@ function setEntity(entityId, type, index)
 				player.interact("ScriptPane","/interface/scripted/bookofspirits/bookofspirits.config")
 			end
 			status.setPersistentEffects("bookofspiritdisplay", {{stat = "bookOfSpiritsOpen", amount = 1},{stat = "bookOfSpiritsDuration", amount = self.bookOfSpiritsConfig.displayDuration}})
-			if self.previousEntity.nameOverride ~= "" then
-				status.setStatusProperty("bookOfSpiritsName",self.previousEntity.nameOverride)
-			else
-				status.setStatusProperty("bookOfSpiritsName",self.previousEntity.name)
-			end
-			status.setStatusProperty("bookOfSpiritsType",self.previousEntity.title)
+			status.setStatusProperty("bookOfSpiritsParams",self.previousEntity)
 		else
-			status.setStatusProperty("bookOfSpiritsName","")--Close the name display
+			status.setStatusProperty("bookOfSpiritsParams",{})
 		end
 	end
 end

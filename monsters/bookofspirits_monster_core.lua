@@ -2,8 +2,10 @@ local bookOfSpiritOldInit = init or function() end
 local bookOfSpiritOldUpdate = update or function() end
 
 function init() bookOfSpiritOldInit()
+  self.myId = entity.id()
   message.setHandler("bookOfSpiritsGetTitle", function(_,_)
     local tableResponse = {}
+    tableResponse.id = self.myId
     tableResponse.title = status.statusProperty("displayTitle","")
     return tableResponse
   end)
@@ -11,10 +13,9 @@ end
 
 function update(dt) bookOfSpiritOldUpdate(dt)
  if not testString then
-    local myId = entity.id()
-    if world.entityName(myId) == "" then
+    if world.entityName(self.myId) == "" then
       local monsterType = monster.type()
-		local portrait = world.entityPortrait(myId,"full")
+		local portrait = world.entityPortrait(self.myId,"full")
       local monsterParts = {}
       local monsterHead = ""
       for i, value in pairs(portrait) do
