@@ -22,7 +22,7 @@ function update(dt) bookOfSpiritOldUpdate(dt)
         local partPath = portrait[i].image
         local endIndex = partPath:match'^.*()/'-1
         partPath = partPath:sub(0,endIndex)
-        local partFolderName = partPath:match'%w+$'
+        local partFolderName = partPath:gsub('.*%/', '')
         if monsterParts[1] ~= partFolderName then
           monsterParts[i] = partFolderName
         end
