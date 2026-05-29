@@ -57,7 +57,7 @@ function update(dt)
 				tableResult = self.getTitle:result()
 				if tableResult.title ~= "" and tableResult.id == self.previousEntity.entityId then
 					self.previousEntity.title = tableResult.title
-					status.setStatusProperty("bookOfSpiritsParams",self.previousEntity)
+					player.setProperty("bookOfSpiritsParams",self.previousEntity)
 				end
 			end
 			self.getTitle = nil
@@ -104,9 +104,9 @@ function setEntity(entityId, type, index)
 				player.interact("ScriptPane","/interface/scripted/bookofspirits/bookofspirits.config")
 			end
 			status.setPersistentEffects("bookofspiritdisplay", {{stat = "bookOfSpiritsOpen", amount = 1},{stat = "bookOfSpiritsDuration", amount = self.bookOfSpiritsConfig.displayDuration}})
-			status.setStatusProperty("bookOfSpiritsParams",self.previousEntity)
+			player.setProperty("bookOfSpiritsParams",self.previousEntity)
 		else
-			status.setStatusProperty("bookOfSpiritsParams",{})
+			player.setProperty("bookOfSpiritsParams",{})
 		end
 	end
 end

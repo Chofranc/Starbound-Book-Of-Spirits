@@ -6,7 +6,7 @@ function init()
 end
 
 function update(dt)
-	local bookOfSpiritsParams = status.statusProperty("bookOfSpiritsParams",{})
+	local bookOfSpiritsParams = player.getProperty("bookOfSpiritsParams",{})
 	if bookOfSpiritsParams.name == nil then
 		widget.setVisible("namePlateLayout",false)
 		pane.dismiss()
@@ -15,7 +15,7 @@ function update(dt)
 		if bookOfSpiritsParams.capturable then
 			if bookOfSpiritsParams.entityId ~= nil then
 				if world.entityExists(bookOfSpiritsParams.entityId) and bookOfSpiritsParams.capturableTreshold > 0 then
-					local health = world.entityHealth(bookOfSpiritsParams.entityId)
+					local health = world.entityHealth(bookOfSpiritsParams.entityId) or {0,0}
 					if health[1]/health[2] <= bookOfSpiritsParams.capturableTreshold then
 						widget.setVisible("namePlateLayout.capturable_glow",true)
 					else
